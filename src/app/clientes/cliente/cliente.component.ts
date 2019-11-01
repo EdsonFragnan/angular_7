@@ -23,7 +23,7 @@ export class ClienteComponent implements OnInit {
   }
 
   handleModalClienteForm(response) {
-    alert('Janela Fechada');
+    //alert('Janela Fechada');
   }
 
 }
