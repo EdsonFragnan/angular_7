@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Cliente } from 'src/app/cliente/models/cliente';
+import { ClienteService } from 'src/app/cliente/services/cliente.service';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-cliente-form',
@@ -13,8 +16,8 @@ export class ClienteFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public activeModal: NgbActiveModal
-  
+    public activeModal: NgbActiveModal,
+    private clienteService: ClienteService
   ) { }
 
   ngOnInit() {
@@ -29,6 +32,18 @@ export class ClienteFormComponent implements OnInit {
     if (this.clienteForm.invalid) {
       return;
     }
+
+    const cliente: Cliente = this.clienteForm.value;
+    cliente.dataMod = new Date();
+    cliente.dataCad = new Date();
+    this.clienteService.salvarClientes(cliente)
+      .then(response => this.handleSuccessSave(response, cliente))
+      .catch(err => console.error(err));
+  }
+
+  handleSuccessSave(response: DocumentReference, cliente: Cliente) {
+    // Dismiss, fechar o modal
+    this.activeModal.dismiss({cliente: cliente, id: response.id, CreateMode: true});
   }
 
 }

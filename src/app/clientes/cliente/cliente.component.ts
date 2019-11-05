@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
+import { ClienteService } from 'src/app/cliente/services/cliente.service';
 
 @Component({
   selector: 'app-cliente',
@@ -9,7 +10,10 @@ import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 })
 export class ClienteComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(
+    private modalService: NgbModal,
+    private clienteService: ClienteService
+  ) { }
 
   ngOnInit() {
   }
@@ -20,6 +24,10 @@ export class ClienteComponent implements OnInit {
       this.handleModalClienteForm.bind(this),
       this.handleModalClienteForm.bind(this)
     );
+  }
+
+  mostrarClientes() {
+
   }
 
   handleModalClienteForm(response) {
