@@ -17,6 +17,7 @@ export class ClienteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.mostrarClientes();
   }
 
   addCliente() {
@@ -40,8 +41,9 @@ export class ClienteComponent implements OnInit {
           nome: data.nome,
           endereco: data.endereco,
           casado: data.casado,
-          dataMod: data.dataMod.toData()
+          dataMod: data.dataMod.toDate()
         };
+        console.log('OI: ', cliente);
         this.clientes.push(cliente);
       });
     });
