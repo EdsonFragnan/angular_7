@@ -16,6 +16,10 @@ export class ClienteComponent implements OnInit {
     private clienteService: ClienteService
   ) { }
 
+  clientes: ClienteViewModel[] = [];
+  modoInsercao: boolean = true;
+  cliente: ClienteViewModel;
+
   ngOnInit() {
     this.mostrarClientes();
   }
@@ -28,7 +32,15 @@ export class ClienteComponent implements OnInit {
     );
   }
 
-  clientes: ClienteViewModel[] = [];
+  EditarClick(cliente: ClienteViewModel) {
+    const modal = this.modalService.open(ClienteFormComponent);
+    modal.result.then(
+      this.handleModalClienteForm.bind(this),
+      this.handleModalClienteForm.bind(this)
+    );
+    modal.componentInstance.modoInsercao = false;
+    modal.componentInstance.cliente = cliente;
+  }
 
   mostrarClientes() {
     this.clienteService.getClientes().subscribe(response => {
@@ -43,14 +55,40 @@ export class ClienteComponent implements OnInit {
           casado: data.casado,
           dataMod: data.dataMod.toDate()
         };
-        console.log('OI: ', cliente);
         this.clientes.push(cliente);
       });
     });
   }
 
+  checkedCasado(index: number) {
+    const novoValor = !this.clientes[index].casado;
+    this.clientes[index].casado = novoValor;
+
+    const obj = {casado: novoValor};
+    const id = this.clientes[index].id;
+    this.clienteService.editarClientesParcial(id, obj);
+  }
+
+  // splice remover cliente
+  DeletarClick(clienteId: string, index: number) {
+    this.clienteService.deletarClientes(clienteId)
+    .then(() => {
+      this.clientes.splice(index, 1);
+    })
+    .catch(err => console.error(err));
+  }
+
+
   handleModalClienteForm(response) {
-    //alert('Janela Fechada');
+    if (response === Object(response)) {
+      if (response.modoInsercao) {
+        response.cliente.id = response.id;
+        this.clientes.unshift(response.cliente);
+      } else {
+        let index = this.clientes.findIndex(value => value.id === response.id);
+        this.clientes[index] = response.cliente;
+      }
+    }
   }
 
 }

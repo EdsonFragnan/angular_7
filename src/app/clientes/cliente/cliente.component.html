@@ -18,7 +18,7 @@
            </thead>
            <tbody>
                <tr *ngFor="let cliente of clientes, let index = index">
-                   <td><input type="checkbox" [checked]="cliente.Casado" (change)="checkedCasado(index)" /></td>
+                   <td><input type="checkbox" [checked]="cliente.casado" (change)="checkedCasado(index)" /></td>
                    <td [ngClass]="{'casado': cliente.casado, 'nao-casado': !cliente.casado}">{{cliente.nome}}</td>
                    <td>{{cliente.endereco}}</td>
                    <td>{{cliente.dataMod | date}}</td>

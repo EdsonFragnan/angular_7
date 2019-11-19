@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from 'src/app/cliente/models/cliente';
 import { ClienteService } from 'src/app/cliente/services/cliente.service';
 import { DocumentReference } from '@angular/fire/firestore';
+import { ClienteViewModel } from 'src/app/cliente/models/cliente-view-model';
 
 @Component({
   selector: 'app-cliente-form',
@@ -13,6 +14,8 @@ import { DocumentReference } from '@angular/fire/firestore';
 export class ClienteFormComponent implements OnInit {
 
   clienteForm: FormGroup;
+  modoInsercao: boolean = true;
+  cliente: ClienteViewModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,9 +29,17 @@ export class ClienteFormComponent implements OnInit {
       endereco: ['', Validators.required],
       casado: false
     });
+
+    if (!this.modoInsercao) {
+      this.carregarTudo(this.cliente);
+    }
   }
 
-  salvarCliente() {
+  carregarTudo(cliente) {
+    this.clienteForm.patchValue(cliente);
+  }
+
+  /*salvarCliente() {
     if (this.clienteForm.invalid) {
       return;
     }
@@ -40,10 +51,37 @@ export class ClienteFormComponent implements OnInit {
       .then(response => this.handleSuccessSave(response, cliente))
       .catch(err => console.error(err));
   }
+  */
+
+ salvarCliente() {
+    if (this.clienteForm.invalid) {
+      return;
+    }
+
+    if (this.modoInsercao) {
+      let cliente: Cliente = this.clienteForm.value;
+      cliente.dataMod = new Date();
+      cliente.dataCad = new Date();
+      this.clienteService.salvarClientes(cliente)
+        .then(response => this.handleSuccessSave(response, cliente))
+        .catch(err => console.error(err));
+    } else {
+      let cliente: ClienteViewModel = this.clienteForm.value;
+      cliente.id = this.cliente.id;
+      cliente.dataMod = new Date();
+      this.clienteService.editarClientes(cliente)
+        .then(() => this.handleSuccessEdit(cliente))
+        .catch(err => console.error(err));
+    }
+  }
 
   handleSuccessSave(response: DocumentReference, cliente: Cliente) {
     // Dismiss, fechar o modal
     this.activeModal.dismiss({cliente: cliente, id: response.id, CreateMode: true});
+  }
+
+  handleSuccessEdit(cliente: ClienteViewModel) {
+    this.activeModal.dismiss({cliente: cliente, id: cliente.id, CreateMode: true});
   }
 
 }
