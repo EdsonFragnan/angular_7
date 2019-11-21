@@ -7,13 +7,12 @@
   },
   "scripts": {
     "ng": "ng",
+    "postinstall": "ng build",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "preinstall": "npm install -g http-server",
-    "postinstall": "ng build && mv dist/* ."
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
