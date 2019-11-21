@@ -1,6 +1,10 @@
 {
   "name": "app-angular-seven",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.1",
+    "npm": "6.12.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
@@ -8,10 +12,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
-  },
-  "engines": {
-    "node": "12.13.1",
-    "npm": "6.12.1"
   },
   "private": true,
   "dependencies": {
