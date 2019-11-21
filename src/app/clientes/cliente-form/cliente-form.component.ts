@@ -77,11 +77,11 @@ export class ClienteFormComponent implements OnInit {
 
   handleSuccessSave(response: DocumentReference, cliente: Cliente) {
     // Dismiss, fechar o modal
-    this.activeModal.dismiss({cliente: cliente, id: response.id, CreateMode: true});
+    this.activeModal.dismiss({cliente: cliente, id: response.id, modoInsercao: true});
   }
 
   handleSuccessEdit(cliente: ClienteViewModel) {
-    this.activeModal.dismiss({cliente: cliente, id: cliente.id, CreateMode: true});
+    this.activeModal.dismiss({cliente: cliente, id: cliente.id, CreateMode: false});
   }
 
 }

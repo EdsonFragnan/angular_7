@@ -1,11 +1,18 @@
-<h4>
-    Tela de Clientes!!
-   </h4>
-   
-   
-   <button class="btn btn-success" (click)="addCliente()">
-      Adicionar Cliente </button>
-   
+<div class="container">
+    <br><br>
+    <div class="row col-md-12">
+        <div class="col-md-8">
+            <h4>
+                Cadastro de Clientes!!
+            </h4>
+        </div>
+        <div class="col-md-4" align="right">
+            <button class="btn btn-success" (click)="addCliente()">
+                Adicionar Cliente
+            </button>
+        </div>
+    </div>
+    <br>
    
       <table class="table table-striped" *ngIf="clientes && clientes.length > 0">
            <thead>
@@ -29,4 +36,5 @@
                </tr>
            </tbody>
        </table>
+</div>
    
