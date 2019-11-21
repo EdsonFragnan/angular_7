@@ -59,14 +59,14 @@ export class ClienteFormComponent implements OnInit {
     }
 
     if (this.modoInsercao) {
-      let cliente: Cliente = this.clienteForm.value;
+      const cliente: Cliente = this.clienteForm.value;
       cliente.dataMod = new Date();
       cliente.dataCad = new Date();
       this.clienteService.salvarClientes(cliente)
         .then(response => this.handleSuccessSave(response, cliente))
         .catch(err => console.error(err));
     } else {
-      let cliente: ClienteViewModel = this.clienteForm.value;
+      const cliente: ClienteViewModel = this.clienteForm.value;
       cliente.id = this.cliente.id;
       cliente.dataMod = new Date();
       this.clienteService.editarClientes(cliente)

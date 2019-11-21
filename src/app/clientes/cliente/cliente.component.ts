@@ -85,7 +85,7 @@ export class ClienteComponent implements OnInit {
         response.cliente.id = response.id;
         this.clientes.unshift(response.cliente);
       } else {
-        let index = this.clientes.findIndex(value => value.id === response.id);
+        const index = this.clientes.findIndex(value => value.id === response.id);
         this.clientes[index] = response.cliente;
       }
     }
