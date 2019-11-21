@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=460 ./node_modules/@angular/cli/bin/ng serve",
+    "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -17,10 +17,10 @@
   "dependencies": {
     "@angular/animations": "~8.2.9",
     "@angular/common": "~8.2.9",
-    "@angular/cli": "~8.3.8",
+    "@angular/cli": "~8.3.6",
     "@angular/compiler-cli": "~8.2.9",
     "@angular/compiler": "~8.2.9",
-    "@angular/core": "~8.2.9",
+    "@angular/core": "~8.2.8",
     "@angular/fire": "^5.2.1",
     "@angular/forms": "~8.2.9",
     "@angular/platform-browser": "~8.2.9",
