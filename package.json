@@ -1,5 +1,5 @@
 {
-  "name": "app-angular-seven",
+  "name": "angular-projeto",
   "version": "1.0.0",
   "engines": {
     "node": "12.13.1",
@@ -7,8 +7,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "postinstall": "ng build",
-    "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
+    "postinstall": "ng build --aot --prod",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
