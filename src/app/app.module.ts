@@ -13,6 +13,8 @@ import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { ClienteFormComponent } from './clientes/cliente-form/cliente-form.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProdutosComponent } from './produtos/produtos.component';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ProdutosComponent } from './produtos/produtos.component';
     ClienteComponent,
     ClienteFormComponent,
     MenuComponent,
-    ProdutosComponent
+    ProdutosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
